@@ -15,7 +15,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'cursive',
+    fontFamily: 'Libre Baskerville,Roboto, sans-serif',
     h1: {
       fontFamily: 'Libre Baskerville, cursive',
     },
