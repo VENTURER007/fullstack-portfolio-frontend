@@ -1,6 +1,6 @@
 import React from "react";
 import { Stack, AppBar, Toolbar, Typography, useMediaQuery, useTheme } from "@mui/material";
-import "@fontsource/pacifico"; // Defaults to weight 400 with all styles included
+
 
 export default function Navbar({ name }) {
   const theme = useTheme();
@@ -22,7 +22,6 @@ export default function Navbar({ name }) {
         <Typography
           variant="h1"
           sx={{
-            fontFamily: "Pacifico, cursive",
             fontSize: {
               xs: "1.5rem",
               sm: "1.5rem",
@@ -41,7 +40,6 @@ export default function Navbar({ name }) {
                 key={text}
                 variant="h6"
                 sx={{
-                  fontFamily: "Pacifico, cursive",
                   fontSize: {
                     xs: "1rem",
                     sm: "1rem",

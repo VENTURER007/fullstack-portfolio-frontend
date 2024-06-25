@@ -32,7 +32,7 @@ const AboutMe = () => {
   }
 
   return (
-    <Container id='about-me-section' sx={{ mt: 4 }}>
+    <Container id='about-me-section' sx={{ mt: 4, mb:4 }}>
       <Typography variant="h1" sx={{ fontSize: { xs: "2rem", md: "3rem" }, textAlign: "center", mb: 2 }}>
         Aboutme
       </Typography>

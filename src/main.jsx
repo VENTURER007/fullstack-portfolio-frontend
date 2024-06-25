@@ -2,8 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import App from "./App.jsx";
-import '@fontsource/pacifico'; // Import the Pacifico font
-
+import '@fontsource-variable/oswald'; // Import the Oswald font
+import '@fontsource/poppins'; // Import the Poppins font
+import '@fontsource/libre-baskerville';
 const theme = createTheme({
   palette: {
     primary: {
@@ -14,49 +15,12 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: 'Pacifico, Arial',
+    fontFamily: 'cursive',
     h1: {
-      fontFamily: 'Pacifico, Arial',
-    },
-    h2: {
-      fontFamily: 'Pacifico, Arial',
-    },
-    h3: {
-      fontFamily: 'Pacifico, Arial',
-    },
-    h4: {
-      fontFamily: 'Pacifico, Arial',
-    },
-    h5: {
-      fontFamily: 'Pacifico, Arial',
-    },
-    h6: {
-      fontFamily: 'Pacifico, Arial',
-    },
-    subtitle1: {
-      fontFamily: 'Pacifico, Arial',
-    },
-    subtitle2: {
-      fontFamily: 'Pacifico, Arial',
-    },
-    body1: {
-      fontFamily: 'Pacifico, Arial',
-    },
-    body2: {
-      fontFamily: 'Pacifico, Arial',
-    },
-    button: {
-      fontFamily: 'Pacifico, Arial',
-    },
-    caption: {
-      fontFamily: 'Pacifico, Arial',
-    },
-    overline: {
-      fontFamily: 'Pacifico, Arial',
+      fontFamily: 'Libre Baskerville, cursive',
     },
   },
 });
-
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

@@ -12,7 +12,12 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@fontsource-variable/oswald": "^5.0.20",
+    "@fontsource/berkshire-swash": "^5.0.20",
+    "@fontsource/comic-neue": "^5.0.12",
+    "@fontsource/libre-baskerville": "^5.0.13",
     "@fontsource/pacifico": "^5.0.13",
+    "@fontsource/poppins": "^5.0.14",
     "@mui/icons-material": "^5.15.20",
     "@mui/material": "^5.15.20",
     "axios": "^1.7.2",

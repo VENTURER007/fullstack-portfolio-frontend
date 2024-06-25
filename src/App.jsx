@@ -46,9 +46,9 @@ function App() {
     <div>
       <Navbar name={heroData.name} />
       <HeroSection data={heroData} />
-      <Divider />
+      <Divider>^_^</Divider>
       <Aboutme />
-      <Divider />
+      <Divider>└(￣-￣)┘</Divider>
       <Projects />
       <Contact />
       <Footer socials={heroData.socials} />
