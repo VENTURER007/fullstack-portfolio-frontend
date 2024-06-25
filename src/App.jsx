@@ -8,6 +8,7 @@ import Projects from "./components/Projects";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
 import { HashLoader } from "react-spinners";
+import { Helmet } from 'react-helmet';
 
 function App() {
   const [heroData, setHeroData] = useState(null);
@@ -44,6 +45,10 @@ function App() {
 
   return (
     <div>
+      <Helmet>
+      <link rel="icon" type="image/svg+xml" href="https://img.icons8.com/nolan/64/developer.png" />
+        <title>{heroData.name.replace(/\s+/g, '_').toLowerCase() + ".dev"}</title>
+      </Helmet>
       <Navbar name={heroData.name} />
       <HeroSection data={heroData} />
       <Divider>^_^</Divider>
