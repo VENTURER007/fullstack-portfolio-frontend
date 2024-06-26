@@ -49,7 +49,7 @@ const AboutMe = () => {
         <Typography variant="h4" sx={{ fontSize: { xs: "1.5rem", md: "2rem" }, textAlign: "centeleftr", mb: 2 }}>
         {aboutMeData.title}
       </Typography>
-          <Typography variant="h5" sx={{ mb: 2 }}>
+          <Typography variant="body1" sx={{ mb: 2 }}>
             {aboutMeData.main_description}
           </Typography>
           <Typography variant="body1" sx={{ whiteSpace: "pre-line" }}>
