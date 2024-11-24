@@ -16,6 +16,20 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
 
+  const preloadImages = (imageUrls) => {
+    return Promise.all(
+      imageUrls.map(
+        (url) =>
+          new Promise((resolve, reject) => {
+            const img = new Image();
+            img.src = url;
+            img.onload = resolve;
+            img.onerror = reject;
+          })
+      )
+    );
+  };
+
   useEffect(() => {
     const interval = setInterval(() => {
       setProgress((prev) => (prev < 90 ? prev + 10 : prev));
@@ -23,13 +37,25 @@ function App() {
 
     axios
       .get("https://full-stack-portfolio-backend-3b934311afd1.herokuapp.com/api/hero/")
-      .then((response) => {
-        setHeroData(response.data);
-        setTimeout(() => {
-          clearInterval(interval);
+      .then(async (response) => {
+        const data = response.data;
+        const imageUrls = [
+          data.background_image,
+          ...data.socials.map((social) => social.logo_url),
+          ...data.tech_stack.map((tech) => tech.logo_url),
+        ];
+
+        try {
+          await preloadImages(imageUrls); // Ensure all images are preloaded
+          setHeroData(data);
           setProgress(100);
           setLoading(false);
-        }, 2500);
+        } catch (imageError) {
+          console.error("Error preloading images", imageError);
+          setError("Error loading images");
+        } finally {
+          clearInterval(interval);
+        }
       })
       .catch((error) => {
         setError("Error fetching the data");
@@ -57,7 +83,6 @@ function App() {
           type="image/svg+xml"
           href="https://img.icons8.com/nolan/64/developer.png"
         />
-        {/* Safely pass the title */}
         <title>{title}</title>
       </Helmet>
       {loading ? (
