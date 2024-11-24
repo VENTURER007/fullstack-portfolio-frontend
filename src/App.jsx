@@ -47,7 +47,7 @@ function App() {
     <div>
       <Helmet>
       <link rel="icon" type="image/svg+xml" href="https://img.icons8.com/nolan/64/developer.png" />
-        <title>{heroData.name.replace(/\s+/g, '_').toLowerCase() + ".dev"}</title>
+        <title>{heroData.name.toLowerCase()}</title>
       </Helmet>
       <Navbar name={heroData.name} />
       <HeroSection data={heroData} />
