@@ -70,35 +70,37 @@ const HeroSection = ({ data }) => {
           </Container>
         </Box>
 
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            maxWidth: { xs: "60%", sm: "50%", md: "45%", lg: "35%", xl: "25%" },
-            mt: { xs: 4, md: 0 },
-            borderRadius: "50%",
-            overflow: "hidden",
-            boxShadow: 3,
-            flexShrink: 0,
-            aspectRatio: "1 / 1",
-          }}
-        >
+        {/* Render image container only if background_image exists */}
+        {data.background_image && (
           <Box
-            component="img"
-            src={data.background_image}
-            alt="Hero image"
             sx={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              maxWidth: { xs: "60%", sm: "50%", md: "45%", lg: "35%", xl: "25%" },
+              mt: { xs: 4, md: 0 },
+              borderRadius: "50%",
+              overflow: "hidden",
+              boxShadow: 3,
+              flexShrink: 0,
+              aspectRatio: "1 / 1",
             }}
-          />
-        </Box>
+          >
+            <Box
+              component="img"
+              src={data.background_image}
+              alt="Hero image"
+              sx={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </Box>
+        )}
       </Stack>
 
       {/* Tech Stacks */}
-
       <Box
         sx={{
           mt: 4,

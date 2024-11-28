@@ -12,22 +12,26 @@ import { Helmet } from "react-helmet";
 
 function App() {
   const [heroData, setHeroData] = useState(null);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
+  const [missingImages, setMissingImages] = useState([]);
 
   const preloadImages = (imageUrls) => {
+    const failedImages = [];
     return Promise.all(
       imageUrls.map(
         (url) =>
-          new Promise((resolve, reject) => {
+          new Promise((resolve) => {
             const img = new Image();
             img.src = url;
             img.onload = resolve;
-            img.onerror = reject;
+            img.onerror = () => {
+              failedImages.push(url);
+              resolve(); // Resolve even on error
+            };
           })
       )
-    );
+    ).then(() => failedImages);
   };
 
   useEffect(() => {
@@ -36,7 +40,9 @@ function App() {
     }, 250);
 
     axios
-      .get("https://full-stack-portfolio-backend-3b934311afd1.herokuapp.com/api/hero/")
+      .get(
+        "https://full-stack-portfolio-backend-3b934311afd1.herokuapp.com/api/hero/"
+      )
       .then(async (response) => {
         const data = response.data;
         const imageUrls = [
@@ -45,24 +51,18 @@ function App() {
           ...data.tech_stack.map((tech) => tech.logo_url),
         ];
 
-        try {
-          await preloadImages(imageUrls); // Ensure all images are preloaded
-          setHeroData(data);
-          setProgress(100);
-          setLoading(false);
-        } catch (imageError) {
-          console.error("Error preloading images", imageError);
-          setError("Error loading images");
-        } finally {
-          clearInterval(interval);
-        }
+        const failedImages = await preloadImages(imageUrls);
+        setMissingImages(failedImages);
+        setHeroData(data);
+        setProgress(100);
+        setLoading(false);
       })
       .catch((error) => {
-        setError("Error fetching the data");
-        console.error(error);
-        clearInterval(interval);
+        console.error("Error fetching the data", error);
+        setHeroData({}); // Continue rendering with empty data
         setLoading(false);
-      });
+      })
+      .finally(() => clearInterval(interval));
 
     return () => clearInterval(interval);
   }, []);
@@ -70,10 +70,6 @@ function App() {
   const title = loading
     ? `Loading... ${progress}%`
     : heroData?.name?.toLowerCase() || "My Portfolio";
-
-  if (error) {
-    return <div>{error}</div>;
-  }
 
   return (
     <div>
@@ -103,14 +99,24 @@ function App() {
         </>
       ) : (
         <Box>
-          <Navbar name={heroData.name} />
-          <HeroSection data={heroData} />
+          <Navbar name={heroData?.name} />
+          <HeroSection
+            data={{
+              ...heroData,
+              background_image: missingImages.includes(
+                heroData?.background_image
+              )
+                ? null
+                : heroData?.background_image,
+            }}
+          />
+
           <Divider>^_^</Divider>
           <Aboutme />
           <Divider>└(￣-￣)┘</Divider>
           <Projects />
           <Contact />
-          <Footer socials={heroData.socials} />
+          <Footer socials={heroData?.socials || []} />
         </Box>
       )}
     </div>
